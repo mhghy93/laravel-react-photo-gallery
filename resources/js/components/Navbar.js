@@ -4,8 +4,8 @@ import { BsUpload } from 'react-icons/bs';
 class Navbar extends Component {
     render() {
         return (
-            <nav className="flex justify-between bg-white h-12">
-                <div className="ml-5 py-2">
+            <nav className="flex justify-between bg-white h-18 shadow-2xl">
+                <div className="ml-5 py-4">
                     <a className="flex" href="/">
                         <img
                             className="h-8 w-8"
@@ -16,7 +16,7 @@ class Navbar extends Component {
                     </a>
                 </div>
 
-                <ul className="flex justify-items-center py-2">
+                <ul className="flex justify-items-center py-4">
                     <li className="mr-5 text-gray-800">
                         <a href="/">Log in</a>
                     </li>
