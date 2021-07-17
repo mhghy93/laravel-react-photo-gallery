@@ -1,9 +1,17 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import { FaSearch } from 'react-icons/fa';
+import { getAllPhotos } from '../redux/photo/photo.actions';
 
 class Home extends Component {
-    state = {};
+    componentDidMount() {
+        this.props.getAllPhotos();
+    }
+
     render() {
+        const { photoReducer } = this.props;
+        const { photos, loading } = photoReducer;
+
         return (
             <Fragment>
                 <div className="container-none">
@@ -38,4 +46,8 @@ class Home extends Component {
     }
 }
 
-export default Home;
+const mapStateToProps = (state) => ({
+    photoReducer: state.photoReducer,
+});
+
+export default connect(mapStateToProps, { getAllPhotos })(Home);

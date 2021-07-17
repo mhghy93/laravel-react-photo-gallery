@@ -17,6 +17,18 @@ const photoReducer = (state = INITIAL_STATE, action) => {
                 photo: payload,
                 loading: false,
             };
+        case photoActionTypes.SHOW_PHOTOS:
+            return {
+                ...state,
+                photos: payload,
+                loading: false,
+            };
+        case photoActionTypes.PHOTO_ERROR:
+            return {
+                ...state,
+                error: payload,
+                loading: false,
+            };
         default:
             return state;
     }
