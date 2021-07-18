@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { FaSearch } from 'react-icons/fa';
 import { getAllPhotos } from '../redux/photo/photo.actions';
+import PhotoListItem from '../components/photos/PhotoListItem';
 
 class Home extends Component {
     componentDidMount() {
@@ -40,6 +41,28 @@ class Home extends Component {
                             </form>
                         </div>
                     </div>
+
+                    {loading ? (
+                        <p className="text-3xl text-center my-3">Loading...</p>
+                    ) : (
+                        <Fragment>
+                            {/* Photo List */}
+                            {photos.data.length > 0 ? (
+                                <div className="mx-5 my-3 grid lg:grid-cols-4 md:grid-cols-2 gap-4">
+                                    {photos.data.map((photo) => (
+                                        <PhotoListItem
+                                            key={photo.id}
+                                            photo={photo}
+                                        />
+                                    ))}
+                                </div>
+                            ) : (
+                                <p className="text-3xl text-center my-3">
+                                    No photos found
+                                </p>
+                            )}
+                        </Fragment>
+                    )}
                 </div>
             </Fragment>
         );
