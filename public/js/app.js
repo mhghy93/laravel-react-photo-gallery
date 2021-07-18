@@ -2309,6 +2309,9 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -2318,21 +2321,53 @@ var PhotoListItem = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(PhotoListItem);
 
   function PhotoListItem() {
+    var _this;
+
     _classCallCheck(this, PhotoListItem);
 
-    return _super.apply(this, arguments);
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      showTitle: false
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleMouseOver", function () {
+      _this.setState({
+        showTitle: true
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleMouseOut", function () {
+      _this.setState({
+        showTitle: false
+      });
+    });
+
+    return _this;
   }
 
   _createClass(PhotoListItem, [{
     key: "render",
     value: function render() {
       var photo = this.props.photo;
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        onMouseOver: this.handleMouseOver,
+        onMouseOut: this.handleMouseOut,
+        className: "relative",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
           className: "h-full w-full",
           src: photo.pic,
           alt: photo.title
-        })
+        }), this.state.showTitle ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "absolute left-2 bottom-4 text-white",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+            children: photo.title
+          })
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {})]
       });
     }
   }]);
