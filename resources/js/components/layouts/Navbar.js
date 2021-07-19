@@ -9,7 +9,7 @@ class Navbar extends Component {
                     <a className="flex" href="/">
                         <img
                             className="h-8 w-8"
-                            src="images/logo.png"
+                            src="/images/logo.png"
                             alt="logo"
                         />
                         <span className="ml-2">IMAGESTORE</span>

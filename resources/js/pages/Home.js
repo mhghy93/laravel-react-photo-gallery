@@ -10,8 +10,8 @@ class Home extends Component {
     }
 
     render() {
-        const { photoReducer } = this.props;
-        const { photos, loading } = photoReducer;
+        const { photo } = this.props;
+        const { photos, loading } = photo;
 
         return (
             <Fragment>
@@ -70,7 +70,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    photoReducer: state.photoReducer,
+    photo: state.photo,
 });
 
 export default connect(mapStateToProps, { getAllPhotos })(Home);

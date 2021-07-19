@@ -18,3 +18,20 @@ export const getAllPhotos = () => async (dispatch) => {
             })
         );
 };
+
+export const getPhotoDetail = (id) => async (dispatch) => {
+    await axios
+        .get(`${BASE_API_URL}/photos/${id}`)
+        .then((res) => {
+            dispatch({
+                type: photoActionTypes.SHOW_PHOTO_DETAIL,
+                payload: res.data,
+            });
+        })
+        .catch((err) =>
+            dispatch({
+                type: photoActionTypes.PHOTO_ERROR,
+                payload: err,
+            })
+        );
+};
