@@ -42,7 +42,7 @@ class Home extends Component {
                         </div>
                     </div>
 
-                    {loading ? (
+                    {loading || typeof photos.data === 'undefined' ? (
                         <p className="text-3xl text-center my-3">Loading...</p>
                     ) : (
                         <Fragment>
