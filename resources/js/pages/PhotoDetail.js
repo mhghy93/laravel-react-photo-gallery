@@ -21,7 +21,6 @@ class PhotoDetail extends Component {
             this.props.photo.photoDetail.data.pic.split('.')[1]
         }`;
         const imageName = imageTitle + imageExtention;
-        alert(imageName);
         saveAs(imageUrl, imageName);
     };
     render() {

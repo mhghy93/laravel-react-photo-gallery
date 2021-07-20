@@ -2629,7 +2629,6 @@ var PhotoDetail = /*#__PURE__*/function (_Component) {
 
       var imageExtention = ".".concat(_this.props.photo.photoDetail.data.pic.split('.')[1]);
       var imageName = imageTitle + imageExtention;
-      alert(imageName);
       (0,file_saver__WEBPACK_IMPORTED_MODULE_3__.saveAs)(imageUrl, imageName);
     });
 
