@@ -1,14 +1,24 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { FaSearch } from 'react-icons/fa';
 import { useFormik } from 'formik';
+import { searchPhoto } from '../../redux/photo/photo.actions';
 
-const SearchBar = () => {
+const SearchBar = ({ searchPhoto }) => {
+    const history = useHistory();
+
     const formik = useFormik({
         initialValues: {
             title: '',
         },
         onSubmit: (values) => {
-            alert(values.title);
+            if (window.location.pathname.includes('/search')) {
+                searchPhoto(values.title);
+                history.push(`/photos/search/${values.title}`);
+            } else {
+                history.push(`/photos/search/${values.title}`);
+            }
         },
     });
     return (
@@ -33,4 +43,8 @@ const SearchBar = () => {
     );
 };
 
-export default SearchBar;
+const mapStateToProps = (state) => ({
+    photo: state.photo,
+});
+
+export default connect(mapStateToProps, { searchPhoto })(SearchBar);

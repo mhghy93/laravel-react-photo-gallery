@@ -26,7 +26,7 @@ class PhotoListItem extends Component {
                 >
                     <img
                         className="h-full w-full"
-                        src={photo.pic}
+                        src={`/${photo.pic}`}
                         alt={photo.title}
                     />
                     {this.state.showTitle ? (
