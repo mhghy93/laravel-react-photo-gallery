@@ -2766,7 +2766,8 @@ var mapStateToProps = function mapStateToProps(state) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getAllPhotos": () => (/* binding */ getAllPhotos),
-/* harmony export */   "getPhotoDetail": () => (/* binding */ getPhotoDetail)
+/* harmony export */   "getPhotoDetail": () => (/* binding */ getPhotoDetail),
+/* harmony export */   "searchPhoto": () => (/* binding */ searchPhoto)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -2849,6 +2850,39 @@ var getPhotoDetail = function getPhotoDetail(id) {
     };
   }();
 };
+var searchPhoto = function searchPhoto(title) {
+  return /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(dispatch) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(_utils_api__WEBPACK_IMPORTED_MODULE_3__.BASE_API_URL, "/photos/search/").concat(title)).then(function (res) {
+                dispatch({
+                  type: _photo_types__WEBPACK_IMPORTED_MODULE_2__.default.SEARCH_PHOTO,
+                  payload: res.data
+                });
+              })["catch"](function (err) {
+                return dispatch({
+                  type: _photo_types__WEBPACK_IMPORTED_MODULE_2__.default.PHOTO_ERROR,
+                  payload: err
+                });
+              });
+
+            case 2:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function (_x3) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+};
 
 /***/ }),
 
@@ -2892,6 +2926,7 @@ var photoReducer = function photoReducer() {
       });
 
     case _photo_types__WEBPACK_IMPORTED_MODULE_0__.default.SHOW_PHOTOS:
+    case _photo_types__WEBPACK_IMPORTED_MODULE_0__.default.SEARCH_PHOTO:
       return _objectSpread(_objectSpread({}, state), {}, {
         photos: payload,
         loading: false

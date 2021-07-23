@@ -35,3 +35,20 @@ export const getPhotoDetail = (id) => async (dispatch) => {
             })
         );
 };
+
+export const searchPhoto = (title) => async (dispatch) => {
+    await axios
+        .get(`${BASE_API_URL}/photos/search/${title}`)
+        .then((res) => {
+            dispatch({
+                type: photoActionTypes.SEARCH_PHOTO,
+                payload: res.data,
+            });
+        })
+        .catch((err) =>
+            dispatch({
+                type: photoActionTypes.PHOTO_ERROR,
+                payload: err,
+            })
+        );
+};

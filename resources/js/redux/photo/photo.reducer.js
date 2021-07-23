@@ -18,6 +18,7 @@ const photoReducer = (state = INITIAL_STATE, action) => {
                 loading: false,
             };
         case photoActionTypes.SHOW_PHOTOS:
+        case photoActionTypes.SEARCH_PHOTO:
             return {
                 ...state,
                 photos: payload,
