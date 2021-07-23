@@ -4,6 +4,7 @@ import { getPhotoDetail } from '../redux/photo/photo.actions';
 import { BsDownload } from 'react-icons/bs';
 import { FaUser } from 'react-icons/fa';
 import { saveAs } from 'file-saver';
+import SearchBar from '../components/search/SearchBar';
 
 class PhotoDetail extends Component {
     constructor(props) {
@@ -29,6 +30,9 @@ class PhotoDetail extends Component {
 
         return (
             <div className="container-none">
+                <div className="mx-5">
+                    <SearchBar />
+                </div>
                 {loading || typeof photoDetail.data === 'undefined' ? (
                     <p className="text-3xl text-center my-3">Loading...</p>
                 ) : (

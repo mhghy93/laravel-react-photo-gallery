@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { FaSearch } from 'react-icons/fa';
 import { getAllPhotos } from '../redux/photo/photo.actions';
+import SearchBar from '../components/search/SearchBar';
 import PhotoListItem from '../components/photos/PhotoListItem';
 
 class Home extends Component {
@@ -27,18 +27,7 @@ class Home extends Component {
                             <h1 className="text-white text-5xl font-bold mt-40">
                                 Stunning free images
                             </h1>
-                            <form className="mt-10 lg:w-7/12 xl:7/12 2xl:w-7/12 md:w-11/12 sm:w-full xs:w-full">
-                                <div className="relative">
-                                    <div className="absolute top-4 left-3">
-                                        <FaSearch className="text-gray-400" />
-                                    </div>
-                                    <input
-                                        className="px-10 py-3 rounded w-full outline-none"
-                                        type="text"
-                                        placeholder="Search image..."
-                                    />
-                                </div>
-                            </form>
+                            <SearchBar />
                         </div>
                     </div>
 
