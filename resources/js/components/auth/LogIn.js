@@ -1,7 +1,19 @@
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 import { IoCloseOutline } from 'react-icons/io5';
+import { useFormik } from 'formik';
+import { userLogIn } from '../../redux/auth/auth.actions';
 
-const LogIn = ({ showLoginModal, handleHideLogin }) => {
+const LogIn = ({ showLoginModal, handleHideLogin, userLogIn }) => {
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+        onSubmit: (values) => {
+            userLogIn(values.email, values.password);
+        },
+    });
     return (
         <Fragment>
             {showLoginModal && (
@@ -20,17 +32,24 @@ const LogIn = ({ showLoginModal, handleHideLogin }) => {
                                     className="text-2xl font-extra-bold text-gray-500 mt-2 mr-2 "
                                 />
                             </div>
-                            <form className="mx-5 mt-2 py-5 flex flex-col">
+                            <form
+                                onSubmit={formik.handleSubmit}
+                                className="mx-5 mt-2 py-5 flex flex-col"
+                            >
                                 <input
                                     className="rounded w-full outline-none py-3 px-5 border border-gray-300 mb-5"
                                     type="email"
                                     name="email"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.email}
                                     placeholder="Email"
                                 />
                                 <input
                                     className="rounded w-full outline-none py-3 px-5 border border-gray-300 mb-5"
                                     type="password"
                                     name="password"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.password}
                                     placeholder="Password"
                                 />
                                 <button className="rounded-2xl bg-green-500 text-white px-8 py-2 hover:bg-green-600 mb-5">
@@ -45,4 +64,8 @@ const LogIn = ({ showLoginModal, handleHideLogin }) => {
     );
 };
 
-export default LogIn;
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+});
+
+export default connect(mapStateToProps, { userLogIn })(LogIn);
