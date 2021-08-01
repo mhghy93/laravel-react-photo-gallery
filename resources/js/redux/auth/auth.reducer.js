@@ -13,6 +13,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
     switch (type) {
         case authActionTypes.USER_SIGN_UP:
         case authActionTypes.USER_LOG_IN:
+        case authActionTypes.AUTHENTICATE_USER:
             return {
                 ...state,
                 user: payload,
