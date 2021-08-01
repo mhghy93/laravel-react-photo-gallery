@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { BsUpload } from 'react-icons/bs';
 import LogIn from '../auth/LogIn';
+import { userLogOut } from '../../redux/auth/auth.actions';
 
 class Navbar extends Component {
     state = {
@@ -15,7 +17,14 @@ class Navbar extends Component {
     handleHideLogin = () => {
         this.setState({ showLogin: false });
     };
+
+    handleLogout = (e) => {
+        e.preventDefault();
+        this.props.userLogOut(this.props.auth.user.token);
+    };
     render() {
+        const { auth } = this.props;
+        const { isAuthenticated } = auth;
         return (
             <Fragment>
                 <nav className="flex justify-between bg-white h-18 shadow-2xl">
@@ -31,13 +40,17 @@ class Navbar extends Component {
                     </div>
 
                     <ul className="flex justify-items-center py-4">
-                        <li
-                            onClick={this.handleShowLogin}
-                            className="mr-5 text-gray-800"
-                        >
-                            Log in
-                        </li>
-                        <li className="mr-5 text-gray-800">Join</li>
+                        {!isAuthenticated && (
+                            <Fragment>
+                                <li
+                                    onClick={this.handleShowLogin}
+                                    className="mr-5 text-gray-800"
+                                >
+                                    Log in
+                                </li>
+                                <li className="mr-5 text-gray-800">Join</li>
+                            </Fragment>
+                        )}
                         <li className="mr-5">
                             <button className="rounded-2xl bg-green-500 text-white px-8 py-1 hover:bg-green-600">
                                 <span className="flex justify-center">
@@ -46,6 +59,16 @@ class Navbar extends Component {
                                 </span>
                             </button>
                         </li>
+                        {isAuthenticated && (
+                            <a href="">
+                                <li
+                                    onClick={this.handleLogout}
+                                    className="mr-5 text-gray-800"
+                                >
+                                    Log Out
+                                </li>
+                            </a>
+                        )}
                     </ul>
                 </nav>
                 {this.state.showLogin && (
@@ -59,4 +82,8 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+});
+
+export default connect(mapStateToProps, { userLogOut })(Navbar);

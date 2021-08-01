@@ -1,10 +1,13 @@
 import React, { Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { IoCloseOutline } from 'react-icons/io5';
 import { useFormik } from 'formik';
 import { userLogIn } from '../../redux/auth/auth.actions';
 
 const LogIn = ({ showLoginModal, handleHideLogin, userLogIn }) => {
+    const history = useHistory();
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -12,6 +15,8 @@ const LogIn = ({ showLoginModal, handleHideLogin, userLogIn }) => {
         },
         onSubmit: (values) => {
             userLogIn(values.email, values.password);
+            handleHideLogin();
+            history.push('/profile');
         },
     });
     return (

@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layouts/Navbar';
 import Home from './pages/Home';
 import PhotoDetail from './pages/PhotoDetail';
+import Profile from './pages/Profile';
 import SearchResults from './pages/SearchResults';
 
 class Main extends Component {
@@ -18,6 +19,7 @@ class Main extends Component {
                         path="/photos/search/:title"
                         component={SearchResults}
                     />
+                    <Route exact path="/profile" component={Profile} />
                 </Switch>
             </BrowserRouter>
         );

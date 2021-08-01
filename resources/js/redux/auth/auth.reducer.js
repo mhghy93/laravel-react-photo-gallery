@@ -31,6 +31,8 @@ const authReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 error: payload,
                 loading: false,
+                isAuthenticated: false,
+                user: {},
             };
 
         default:
