@@ -7,9 +7,9 @@ class Profile extends Component {
         const { auth } = this.props;
         const { isAuthenticated } = auth;
 
-        // if (!isAuthenticated) {
-        //     return <Redirect to="/" />;
-        // }
+        if (!isAuthenticated) {
+            return <Redirect to="/" />;
+        }
 
         return (
             <div className="container-none">

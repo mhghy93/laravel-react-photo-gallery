@@ -5,7 +5,12 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { useFormik } from 'formik';
 import { userLogIn } from '../../redux/auth/auth.actions';
 
-const LogIn = ({ showLoginModal, handleHideLogin, userLogIn }) => {
+const LogIn = ({
+    showLoginModal,
+    handleHideLogin,
+    userLogIn,
+    auth: { isAuthenticated, error },
+}) => {
     const history = useHistory();
 
     const formik = useFormik({
@@ -15,10 +20,14 @@ const LogIn = ({ showLoginModal, handleHideLogin, userLogIn }) => {
         },
         onSubmit: (values) => {
             userLogIn(values.email, values.password);
-            handleHideLogin();
-            history.push('/profile');
         },
     });
+
+    if (isAuthenticated) {
+        handleHideLogin();
+        history.push('/profile');
+    }
+
     return (
         <Fragment>
             {showLoginModal && (
@@ -41,6 +50,11 @@ const LogIn = ({ showLoginModal, handleHideLogin, userLogIn }) => {
                                 onSubmit={formik.handleSubmit}
                                 className="mx-5 mt-2 py-5 flex flex-col"
                             >
+                                {error.message && (
+                                    <p className="text-red-600 mb-3">
+                                        * {error.message}
+                                    </p>
+                                )}
                                 <input
                                     className="rounded w-full outline-none py-3 px-5 border border-gray-300 mb-5"
                                     type="email"
@@ -49,6 +63,11 @@ const LogIn = ({ showLoginModal, handleHideLogin, userLogIn }) => {
                                     value={formik.values.email}
                                     placeholder="Email"
                                 />
+                                {error.email && (
+                                    <p className="text-red-600 mb-3">
+                                        * {error.email}
+                                    </p>
+                                )}
                                 <input
                                     className="rounded w-full outline-none py-3 px-5 border border-gray-300 mb-5"
                                     type="password"
@@ -57,6 +76,11 @@ const LogIn = ({ showLoginModal, handleHideLogin, userLogIn }) => {
                                     value={formik.values.password}
                                     placeholder="Password"
                                 />
+                                {error.password && (
+                                    <p className="text-red-600 mb-3">
+                                        * {error.password}
+                                    </p>
+                                )}
                                 <button className="rounded-2xl bg-green-500 text-white px-8 py-2 hover:bg-green-600 mb-5">
                                     Log In
                                 </button>

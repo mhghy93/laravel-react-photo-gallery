@@ -25,7 +25,10 @@ export const userLogIn = (email, password) => async (dispatch) => {
             .catch((err) =>
                 dispatch({
                     type: authActionTypes.AUTH_ERROR,
-                    payload: err,
+                    payload:
+                        err.response.status === 422
+                            ? err.response.data.errors
+                            : err.response.data,
                 })
             );
     });
